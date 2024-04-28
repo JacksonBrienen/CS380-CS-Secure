@@ -1,0 +1,39 @@
+This is meant to explain my logic for how I currently have the database set up. I know it will likely change drastically, but I created it so I have something to work off of using node.js
+
+
+
+A student can have zero to many classes taken, and a class can be taken by zero to many students
+A class can have zero to many prerequisites and can be a prerequisite for zero to many classes
+A student can have (for simplicites sake) zero to one majors, a major can have one to many required classes
+
+
+
+I then took the above ideas for how students/majors/classes needed to work and made it into more workable business rules
+
+
+
+A student can have zero to many classes taken, listed in the student_taken table
+A student_taken entry corresponds to one and only one student
+
+A class can be taken by zero to many students, listed in the student_taken table
+A student_taken entry corresponds to one and only one student
+
+A class can be a prerequisite for zero to many classes
+A prerequisite corresponds to one and only one class
+
+A class can have zero to many prerequisites
+A prerequisite corresponds to one and only one class
+
+A student can have zero to one majors
+A major can have one to many students
+
+A major has one to many requirements
+A major requirement corresponds to one and only one major
+
+A class can be a major requirement for zero to many majors
+A major requirement involves zero to one classes
+
+
+
+This got a little convoluted but I think it makes sense, I will check in with you next time we meet to discuss needed changes.
+My thought on the last one is that major_requirements would list every possible class for that major, so a class COULD be a requirement or NOT, and a requirement COULD be fulfilled by a class or NOT
