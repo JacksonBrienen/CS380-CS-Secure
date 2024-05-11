@@ -1,0 +1,26 @@
+#main > h2 {
+    text-align: center;
+    margin: 0 0 5px;
+}
+
+#class-graph {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 80%;
+    margin-bottom: 10px;
+    min-height: 200px;
+}
+
+#graph-canvas {
+    margin: 0;
+    width: 80%;
+    height: 100%;
+    border: black solid 1px;
+}
+
+#account-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
