@@ -1,0 +1,117 @@
+/*
+courseManager.css
+@author Daniel Tongu
+*/
+
+:root {
+    --margin: 20px;
+    --padding: 20px;
+    --height:500px;
+    --white: #ffffff;
+    --green-lowlight: #0E6655;
+    --green-highlight: #218838;
+    --gray-lowlight: #85929E;
+    --gray-highlight: #ABB2B9;
+    --gray-shade: #B3B6B7;
+}
+* {
+    font-family: 'Consolas', 'Calibri', 'Arial', sans-serif;
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+body {
+    padding: var(--margin);
+    background-color: var(--gray-lowlight);
+}
+h1 {
+    font-size: 8vw;
+}
+h1,
+h2{
+    padding: var(--margin);
+    background-color: inherit;
+}
+header, h1, h2, h3, ul{
+    margin: var(--padding) var(--padding) 0;
+}
+h2, #courseCatalog,
+#academicYearPlan,
+#completedCourses {
+    border-bottom: 3px solid #0E6655;
+    position: -ms-device-fixed; /* Safari */
+    position: sticky;
+    top: 0;
+}
+#courseCatalog,
+#academicYearPlan,
+#completedCourses {
+    overflow: auto;
+    margin-bottom: var(--margin);
+    background-color: var(--gray-highlight);
+    box-shadow: 0 -2px 16px 0 rgba(0,0,0,0.2);
+    border-radius: 10px;
+    border: 1px solid;
+    width: 100%;
+    height: var(--height);
+    float: none;
+}
+header:after,
+ul:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+ul {
+    border-top: 1px solid grey;
+    margin-top: 0;
+    list-style-type: none;
+    background-color: var(--gray-shade);
+    min-height: 3em;
+    overflow: auto;
+}
+li {
+    float: left;
+    margin: 5px;
+    border: 1px solid #117A65;
+    padding: 5px;
+    background-color: white;
+}
+[draggable="true"] {
+    cursor: grab;
+}
+header button {
+    float: right;
+    padding: 8px 16px;
+    background-color: var(--green-lowlight);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+header button:hover {
+  background-color: var(--green-highlight);
+}
+@media (min-width: 700px) {
+  #courseCatalog, #academicYearPlan {
+      margin: calc(2 * var(--margin)) var(--margin) ;
+      width: calc((100% / 2) - var(--margin) * 2);
+      float: left;
+  }
+  #completedCourses {
+      width: calc(100% - var(--margin) * 2);
+      margin: var(--margin);
+      clear: both;
+  }
+}
+@media (min-width: 1300px) {
+  #courseCatalog, #academicYearPlan, #completedCourses {
+      margin: var(--margin);
+      width: calc((100% / 3) - var(--margin) * 2);
+      height: var(--height);
+      float: left;
+  }
+  #completedCourses {
+      clear: none;
+  }
+}
