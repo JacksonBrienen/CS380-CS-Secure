@@ -11,11 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = $('#academicYearPlan section header button');
 
     buttons.forEach(button => {
-      button.addEventListener('click', function() {
-          const section = this.closest('section');
-          const season = section.id;
-          completeCourses(season);
-      });
+        button.addEventListener('click', function() {
+            const section = this.closest('section');
+            const season = section.id;
+            completeCourses(season);
+        });
     });
 
     // Add drag-and-drop functionality to each course
@@ -39,8 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
  * @param {DragEvent} event - The dragstart event object
  */
 function dragStart(event) {
-  event.dataTransfer.setData('text', event.target.id);
-  setTimeout(() => event.target.classList.add('hide'), 0);
+    event.dataTransfer.setData('text', event.target.id);
+    setTimeout(() => event.target.classList.add('hide'), 0);
 }
 
 /**
@@ -48,7 +48,7 @@ function dragStart(event) {
  * @param {DragEvent} event - The dragend event object
  */
 function dragEnd(event) {
-  event.target.classList.remove('hide');
+    event.target.classList.remove('hide');
 }
 
 /**
@@ -56,10 +56,10 @@ function dragEnd(event) {
  * @param {DragEvent} event - The dragover event object
  */
 function dragOver(event) {
-  event.preventDefault();
-  if (event.target.tagName === 'UL') {
-    event.target.classList.add('hovered');
-  }
+    event.preventDefault();
+    if (event.target.tagName === 'UL') {
+        event.target.classList.add('hovered');
+    }
 }
 
 /**
@@ -67,9 +67,9 @@ function dragOver(event) {
  * @param {DragEvent} event - The dragleave event object
  */
 function dragLeave(event) {
-  if (event.target.tagName === 'UL') {
-    event.target.classList.remove('hovered');
-  }
+    if (event.target.tagName === 'UL') {
+        event.target.classList.remove('hovered');
+    }
 }
 
 /**
@@ -77,17 +77,17 @@ function dragLeave(event) {
  * @param {DragEvent} event - The drop event object
  */
 function drop(event) {
-  event.preventDefault();
-  const id = event.dataTransfer.getData('text');
-  const draggable = document.getElementById(id);
-  if (draggable && event.target.tagName === 'UL') {
-    event.target.classList.remove('hovered');
-    try {
-      event.target.appendChild(draggable);
-    } catch (error) {
-      console.error("Failed to append child:", error);
+    event.preventDefault();
+    const id = event.dataTransfer.getData('text');
+    const draggable = document.getElementById(id);
+    if (draggable && event.target.tagName === 'UL') {
+        event.target.classList.remove('hovered');
+        try {
+            event.target.appendChild(draggable);
+        } catch (error) {
+            console.error("Failed to append child:", error);
+        }
     }
-  }
 }
 
 /**
