@@ -6,7 +6,7 @@ courseManager.css
 :root {
     --margin: 20px;
     --padding: 20px;
-    --height:500px;
+    --height: 500px;
     --white: #ffffff;
     --green-lowlight: #0E6655;
     --green-highlight: #218838;
@@ -56,6 +56,10 @@ h2, #courseCatalog,
     height: var(--height);
     float: none;
 }
+#courseCatalog ul,
+#completedCourses ul{
+    min-height: 77% !important;
+}
 header:after,
 ul:after {
     content: "";
@@ -90,28 +94,28 @@ header button {
     cursor: pointer;
 }
 header button:hover {
-  background-color: var(--green-highlight);
+    background-color: var(--green-highlight);
 }
 @media (min-width: 700px) {
-  #courseCatalog, #academicYearPlan {
-      margin: calc(2 * var(--margin)) var(--margin) ;
-      width: calc((100% / 2) - var(--margin) * 2);
-      float: left;
-  }
-  #completedCourses {
-      width: calc(100% - var(--margin) * 2);
-      margin: var(--margin);
-      clear: both;
-  }
+    #courseCatalog, #academicYearPlan {
+        margin: calc(2 * var(--margin)) var(--margin) ;
+        width: calc((100% / 2) - var(--margin) * 2);
+        float: left;
+    }
+    #completedCourses {
+        width: calc(100% - var(--margin) * 2);
+        margin: var(--margin);
+        clear: both;
+    }
 }
 @media (min-width: 1300px) {
-  #courseCatalog, #academicYearPlan, #completedCourses {
-      margin: var(--margin);
-      width: calc((100% / 3) - var(--margin) * 2);
-      height: var(--height);
-      float: left;
-  }
-  #completedCourses {
-      clear: none;
-  }
+    #courseCatalog, #academicYearPlan, #completedCourses {
+        margin: var(--margin);
+        width: calc((100% / 3) - var(--margin) * 2);
+        height: var(--height);
+        float: left;
+    }
+    #completedCourses {
+        clear: none;
+    }
 }
