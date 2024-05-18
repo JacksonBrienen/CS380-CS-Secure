@@ -16,7 +16,7 @@ Cassie Thun : This week I worked on creating the sign-up page. I created and for
 
 Cole Manchester : This week I focused on making our sign in page functional and linked to our style sheets to keep a similar format to our other pages. My goal is to change our student ID intake page to accept a student email and password instead of just 1 integer value. The final goal is to connect this user input to our database through javascript and possibly authenticating these emails with our given school email format.
 
-Daniel Tongu : 
+Daniel Tongu : This week, I focused on creating a course manager page and presented it to the team for feedback. During the review, we discussed which features to include or exclude to optimize functionality. One of the key decisions was to enable dragging and dropping of courses across all sections on the page, making it more user-friendly and intuitive. Additionally, we agreed that the “Completed” section should display the courses in the same format as the “Needed” section to maintain consistency in the user interface.
 
 Jace Marden : This week I looked into Node.js usage and syntax to understand how to connect front-end to our sql database while waiting for some front end work to solidify in order to create usable connections. I need to make some updates to our database schema, add in the data using the JSON file provided by Jackson, and prepare to reverse that process and pull data out using node.js into JSON per request. I will need to create the connections within node.js to pull and push information between front end and the database as required.
 
