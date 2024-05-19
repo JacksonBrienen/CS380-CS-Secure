@@ -1,0 +1,1 @@
+The SQL Script in this folder is basic. It does not have all that classes.JSON has, but it has the core components so that if classes.JSON were to fail, this script could be run in its place
