@@ -1,0 +1,54 @@
+.centered-flex {
+    display: flex;
+    justify-content: center;
+}
+
+.two-column-layout {
+    display: flex;
+    justify-content: space-between;
+}
+
+.two-column-layout:nth-child(1) {
+    margin-left: auto;
+}
+
+form {
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: right;
+}
+
+#main > div {
+    margin-top: 10%;
+}
+
+form div:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+h2 {
+    text-align: center;
+}
+
+input {
+    width: 200px;
+}
+
+select {
+    width: 208px;
+}
+
+#email, #password, #confirm-password {
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 2px 5px;
+}
+
+#major {
+    border-radius: 10px;
+    border-width: 1px;
+    width: 212px;
+}
