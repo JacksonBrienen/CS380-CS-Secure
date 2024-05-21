@@ -41,7 +41,7 @@ select {
     width: 208px;
 }
 
-#email, #password, #confirm-password {
+#email, #password, #confirm-password, #sid {
     border-radius: 10px;
     border-width: 1px;
     padding: 2px 5px;
