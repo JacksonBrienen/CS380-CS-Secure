@@ -47,7 +47,7 @@ class MultiCourse extends Course {
      * @param {string} name
      * @param {string} description
      * @param {string} link
-     * @param {[Course[]]} courses
+     * @param {[SimpleCourse[]]} courses
      * @param {boolean} majorRequirement
      * @param {boolean} genEd
      */
