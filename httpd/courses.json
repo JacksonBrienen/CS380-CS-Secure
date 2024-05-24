@@ -407,7 +407,7 @@
         "description": "The community, culture, and citizenship perspective engages students with historic and contemporary political, ethical, cultural, socioeconomic, and other emerging issues affecting society. By grappling with the intersection of social concerns, students will learn how societies are created and how to contribute to them as effective citizens.",
         "majorRequirement": false,
         "genEd": true,
-        "mutliCourse": true,
+        "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K2CommunityCultureAndCitizenship",
         "courses": [["ABS210"], ["BUS241"], ["ECON101"], ["EFC250"], ["GEOG250"], ["HIST143"], ["HIST144"], ["LAWJ102"], ["LIS245"], ["LLAS102"], ["LLAS405"], ["MKT360"], ["POSC210"], ["PSY310"], ["PUBH351"], ["SOC109"], ["SUST301"], ["WGSS201"]]
     },
@@ -598,7 +598,7 @@
         "description": "The creative expression perspective allows students to explore aesthetic expression and artistic perspectives on common themes in the literary and fine arts.",
         "majorRequirement": false,
         "genEd": true,
-        "mutliCourse": true,
+        "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K3CreativeExpression",
         "courses": [["DHC150"], ["DNCE161"], ["ENG264"], ["FILM150"], ["MUS101"], ["MUS103"], ["TH101"], ["TH107"]]
     },
@@ -688,7 +688,7 @@
         "description": "The global dynamics perspective focuses on how individuals, groups, communities, and nations function in a global society. Students will gain a cultural awareness and sensitivity that prepares them for citizenship in a diverse, global society by developing an understanding of how culture shapes human experience, an appreciation for diverse worldviews, and an awareness of the complexity of the interactions among local, regional, national, and global systems.",
         "majorRequirement": false,
         "genEd": true,
-        "mutliCourse": true,
+        "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K4GlobalDynamics",
         "courses": [["ANTH130"], ["AST102"], ["COM302"], ["ECON202"], ["EDLT217"], ["ENG347"], ["ENST301"], ["GEOG101"], ["GERM200"], ["HIST101"], ["HIST103"], ["KRN311"], ["MUS105"], ["PHIL106"], ["POSC270"], ["RELS103"], ["WLC311"]]
     },
@@ -868,7 +868,7 @@
         "description": "The humanities perspective focuses on helping students interpret their world, culture, and perspectives through the study of philosophical, literary, and historical forms.",
         "majorRequirement": false,
         "genEd": true,
-        "mutliCourse": true,
+        "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K5Humanities",
         "courses": [["DHC140"], ["HIST102"], ["HIST301"], ["HUM101"], ["HUM103"], ["LAJ215"], ["MGT395"], ["PHIL101"], ["PHIL104"], ["RELS101"], ["TH382"]]
     },
@@ -988,7 +988,7 @@
         "description": "The individual and society perspective focuses on the relationship between people and their socialization. Students will be exposed to connections between behaviors, perspectives, psychology, and influences affecting everyday life.",
         "majorRequirement": false,
         "genEd": true,
-        "mutliCourse": true,
+        "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K6IndividualAndSociety",
         "courses": [["AIS101"], ["ANTH107"], ["ANTH180"], ["ASP305"], ["ATM281"], ["CDFS101"], ["CDFS234"], ["DHC250"], ["ECON201"], ["GEOG208"], ["HED101"], ["HRM381"], ["IDS357"], ["LAJ216"], ["MGT380"], ["MGT386"], ["POSC101"], ["POSC260"], ["PSY101"], ["PSY242"], ["SOC101"], ["SOC107"], ["SOC307"], ["STP300"], ["WGSS250"]]
     },
@@ -1248,7 +1248,7 @@
         "description": "This Physical and Natural World perspective introduces the core practice of science: generating testable explanations. Students will be introduced to fundamental scientific concepts and will engage in scientific practices.",
         "majorRequirement": false,
         "genEd": true,
-        "mutliCourse": true,
+        "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K7PhysicalAndNaturalWorld",
         "courses": [["BIOL101"], ["CHEM111", "CHEM111LAB"], ["CHEM181", "CHEM181LAB"], ["ENST201"], ["EXSC154"], ["GEOG107"], ["GEOL101"], ["GEOL107"], ["PHYS101"], ["PHYS106"], ["SCED101"]]
     },
@@ -1389,7 +1389,7 @@
         "description": "The science and technology perspective focuses on scientific inquiry, intersections with technology, mathematical applications, and connections to the world around us.",
         "majorRequirement": false,
         "genEd": true,
-        "mutliCourse": true,
+        "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K8ScienceAndTechnology",
         "courses": [["ACCT301"], ["ANTH120"], ["BIOL201"], ["BIOL300"], ["ETSC101"], ["GEOL108"], ["GEOL302"], ["IEM302"], ["IT202"], ["NUTR101"], ["PUBH320"], ["SHM102"]]
     },
