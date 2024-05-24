@@ -29,7 +29,7 @@ class SimpleCourse extends Course {
      * @param {string} description
      * @param {string} link
      * @param {number} credits
-     * @param {[Course[]]} prereqs
+     * @param {[string[]]} prereqs
      * @param {boolean} majorRequirement
      * @param {boolean} genEd
      */
@@ -47,7 +47,7 @@ class MultiCourse extends Course {
      * @param {string} name
      * @param {string} description
      * @param {string} link
-     * @param {[SimpleCourse[]]} courses
+     * @param {[string[]]} courses
      * @param {boolean} majorRequirement
      * @param {boolean} genEd
      */
