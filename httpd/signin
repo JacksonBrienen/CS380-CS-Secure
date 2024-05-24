@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+//local style sheet. can be changed to signup to match
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        #header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        #logo {
+            width: 100px;
+            height: auto;
+            margin-right: 20px;
+        }
+
+        #header-text {
+            text-align: left;
+        }
+
+        #main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        #signin-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        #signin-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #signin-form .button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff9800;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #signin-form .button:hover {
+            background-color: #e68900;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img src="icon.png" alt="Logo" id="logo">
+        <div id="header-text">
+            <h1>Welcome</h1>
+            <h4>Please enter your student details</h4>
+        </div>
+    </div>
+    <div id="main">
+        <form id="signin-form">
+            <input type="text" id="student-id" placeholder="Student ID" required>
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit" class="button orange-button">Sign In</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("signin-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+	    //student values
+            var studentID = document.getElementById("student-id").value;
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+
+            //HTTP request to server to submit the data
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    studentID: studentID,
+                    username: username,
+                    email: email
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Welcome student!");
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
