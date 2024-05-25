@@ -131,8 +131,10 @@
                 }
             }
 
-            top.addEventListener("click", toggleState);
-            btm.addEventListener("click", toggleState);
+            btm.addEventListener("click", (e)=>{
+                e.preventDefault();
+                toggleState();
+            });
             toggleState();
         });
     </script>
