@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
     <style>
-//local style sheet. can be changed to signup to match
+/* local style sheet. can be changed to signup to match */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -15,8 +15,10 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            /*background-color: #f0f0f0;*/
+            background-color: #85929E;
             position: relative;
+            /*background-image: linear-gradient(115deg, rgba(171,0,50,0.5) 5%, rgba(171,0,50,1) 90%);*/
         }
 
         #header {
@@ -46,10 +48,12 @@
         }
 
         #signin-form {
+
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: white;
+            /*background-color: white;*/
+            background-color: #ABB2B9;
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -67,7 +71,8 @@
         #signin-form .button {
             width: 100%;
             padding: 10px;
-            background-color: #ff9800;
+            /*background-color: #ff9800;*/
+            background-color: #0E6655;
             border: none;
             border-radius: 4px;
             color: white;
@@ -76,7 +81,8 @@
         }
 
         #signin-form .button:hover {
-            background-color: #e68900;
+            /*background-color: #e68900;*/
+            background-color: #218838;
         }
     </style>
 </head>
@@ -90,12 +96,47 @@
     </div>
     <div id="main">
         <form id="signin-form">
-            <input type="text" id="student-id" placeholder="Student ID" required>
-            <input type="text" id="username" placeholder="Username" required>
             <input type="email" id="email" placeholder="Email" required>
-            <button type="submit" class="button orange-button">Sign In</button>
+            <input type="text" id="student-id" placeholder="Student ID" required>
+            <input type="password" id="passwd" placeholder="Password" required>
+            <input type="password" id="conf-passwd" placeholder="Confirm Password" required>
+            <input type="submit" id="top-button" class="button orange-button" value="Sign In">
+            <button id="btm-button" class="button orange-button"></button>
         </form>
     </div>
+
+    <script>
+        window.addEventListener('load', ()=> {
+            // false -> sign in
+            // true  -> sign up
+            let state = true;
+
+            const sid = document.getElementById("student-id");
+            const conf_passwd = document.getElementById("conf-passwd");
+            const top = document.getElementById("top-button");
+            const btm = document.getElementById("btm-button");
+
+            function toggleState() {
+                state = !state;
+                if(state) {
+                    sid.style.setProperty("display", "inherit");
+                    conf_passwd.style.setProperty("display", "inherit");
+                    top.setAttribute("value", "Sign Up");
+                    btm.innerText = "Sign In Instead";
+                } else {
+                    sid.style.setProperty("display", "none");
+                    conf_passwd.style.setProperty("display", "none");
+                    top.setAttribute("value", "Sign In");
+                    btm.innerText = "Sign Up Instead";
+                }
+            }
+
+            top.addEventListener("click", toggleState);
+            btm.addEventListener("click", toggleState);
+            toggleState();
+        });
+    </script>
+
     <script>
         document.getElementById("signin-form").addEventListener("submit", function(event) {
             event.preventDefault();
