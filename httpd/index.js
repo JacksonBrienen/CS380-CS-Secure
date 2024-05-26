@@ -105,7 +105,6 @@ window.onload = () => {
             }
         } else {
             const mousePos = new Vector(e.offsetX - translation.x, e.offsetY - translation.y);
-            console.log(mousePos);
             let oldHovered = hovered;
             hovered = false;
             for(let i = nodes.length - 1; i > -1; i--) {
