@@ -53,7 +53,7 @@
         "name": "Computer Architecture I",
         "description": "Introduction to computer architecture, data representations, assembly language, addressing techniques. Course will be offered every year. Course will not have an established scheduling pattern.",
         "credits": 4,
-        "prereqs": ["CS111"],
+        "prereqs": [["CS111"]],
         "link": "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256158",
         "majorRequirement": true,
         "genEd": false,
@@ -103,7 +103,7 @@
         "name": "Introduction to Software Engineering",
         "description": "An introduction to the principles and practices of software engineering, including object-oriented analysis and design, design patterns, and testing. Course will not have an established scheduling pattern.",
         "credits": 4,
-        "prereqs": ["CS302", "CS325"],
+        "prereqs": [["CS302"], ["CS325"]],
         "link": "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256179",
         "majorRequirement": true,
         "genEd": false,
@@ -409,7 +409,7 @@
         "genEd": true,
         "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K2CommunityCultureAndCitizenship",
-        "courses": [["ABS210"], ["BUS241"], ["ECON101"], ["EFC250"], ["GEOG250"], ["HIST143"], ["HIST144"], ["LAWJ102"], ["LIS245"], ["LLAS102"], ["LLAS405"], ["MKT360"], ["POSC210"], ["PSY310"], ["PUBH351"], ["SOC109"], ["SUST301"], ["WGSS201"]]
+        "courses": [["ABS210"], ["BUS241"], ["ECON101"], ["EFC250"], ["GEOG250"], ["HIST143"], ["HIST144"], ["LAJ102"], ["LIS245"], ["LLAS102"], ["LLAS405"], ["MKT360"], ["POSC210"], ["PSY310"], ["PUBH351"], ["SOC109"], ["SUST301"], ["WGSS201"]]
     },
     "ABS210": {
         "name": "Introduction to Black Experience in the U.S.",
@@ -690,7 +690,7 @@
         "genEd": true,
         "multiCourse": true,
         "link": "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K4GlobalDynamics",
-        "courses": [["ANTH130"], ["AST102"], ["COM302"], ["ECON202"], ["EDLT217"], ["ENG347"], ["ENST301"], ["GEOG101"], ["GERM200"], ["HIST101"], ["HIST103"], ["KRN311"], ["MUS105"], ["PHIL106"], ["POSC270"], ["RELS103"], ["WLC311"]]
+        "courses": [["ANTH130"], ["AST102"], ["COM302"], ["ECON202"], ["EDLT217"], ["ENG347"], ["ENST310"], ["GEOG101"], ["GERM200"], ["HIST101"], ["HIST103"], ["KRN311"], ["MUS105"], ["PHIL106"], ["POSC270"], ["RELS103"], ["WLC311"]]
     },
     "ANTH130": {
         "name": "Cultural Worlds",
@@ -874,7 +874,7 @@
     },
     "DHC140": {
         "name": "Humanistic Understanding",
-        "description": "\nAdd to My Favorites (opens a new window)\nShare this Page\nPrint (opens a new window)\nHelp (opens a new window)\nAdd to Portfolio (opens a new window)\nDHC 140 - Humanistic Understanding\nDescription:\nVariable topic. Courses in the humanities focuses on the analysis and interpretation of human stories of the past, present, and future in order to understand the processes of continuity and change in individuals and cultures through both documented and imaginative accounts.",
+        "description": "Courses in the humanities focuses on the analysis and interpretation of human stories of the past, present, and future in order to understand the processes of continuity and change in individuals and cultures through both documented and imaginative accounts.",
         "credits": 5,
         "prereqs": [],
         "link": "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256194",
