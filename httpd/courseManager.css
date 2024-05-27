@@ -7,32 +7,23 @@ courseManager.css
     --margin: 20px;
     --padding: 20px;
     --height: 500px;
-    --white: #ffffff;
-    --green-lowlight: #0E6655;
-    --green-highlight: #218838;
-    --gray-lowlight: #85929E;
-    --gray-highlight: #ABB2B9;
-    --gray-shade: #B3B6B7;
 }
+
 * {
-    font-family: 'Consolas', 'Calibri', 'Arial', sans-serif;
     box-sizing: border-box;
     margin:0;
     padding:0;
 }
-body {
-    padding: var(--margin);
-    background-color: var(--gray-lowlight);
-}
-h1 {
+
+#academicYearPlan h1 {
     font-size: 8vw;
 }
-h1,
+#academicYearPlan h1,
 h2{
     padding: var(--margin);
     background-color: inherit;
 }
-header, h1, h2, h3, ul{
+#academicYearPlan header,#academicYearPlan h1, h2, h3, ul{
     margin: var(--padding) var(--padding) 0;
 }
 h2, #courseCatalog,
@@ -60,7 +51,7 @@ h2, #courseCatalog,
 #completedCourses ul{
     min-height: 77% !important;
 }
-header:after,
+#academicYearPlan header:after,
 ul:after {
     content: "";
     display: block;
@@ -84,18 +75,15 @@ li {
 [draggable="true"] {
     cursor: grab;
 }
-header button {
+#academicYearPlan header button {
     float: right;
-    padding: 8px 16px;
-    background-color: var(--green-lowlight);
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    font-size: 0.8em;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
-header button:hover {
-    background-color: var(--green-highlight);
-}
+
+
+
 @media (min-width: 700px) {
     #courseCatalog, #academicYearPlan {
         margin: calc(2 * var(--margin)) var(--margin) ;
@@ -106,6 +94,10 @@ header button:hover {
         width: calc(100% - var(--margin) * 2);
         margin: var(--margin);
         clear: both;
+    }
+
+    #main {
+        margin-top: 5%;
     }
 }
 @media (min-width: 1300px) {
@@ -118,4 +110,28 @@ header button:hover {
     #completedCourses {
         clear: none;
     }
+
+    #main {
+        margin-top: 10%;
+    }
+}
+
+li:has(select) {
+    padding: 4px 2px 4px 2px;
+}
+
+select {
+    /*padding: 4px 0 4px 0;*/
+    padding: 0;
+    border: none;
+    font-size: inherit;
+}
+option {
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: white;
+}
+select:focus {
+    outline:none;
 }

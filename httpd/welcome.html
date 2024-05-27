@@ -3,194 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
-    <style>
-/* local style sheet. can be changed to signup to match */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            /*background-color: #f0f0f0;*/
-            background-color: #85929E;
-            position: relative;
-            /*background-image: linear-gradient(115deg, rgba(171,0,50,0.5) 5%, rgba(171,0,50,1) 90%);*/
-        }
+    <title>CS Secure | Welcome</title>
 
-        #header {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            align-items: center;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
-        #logo {
-            width: 100px;
-            height: auto;
-            margin-right: 20px;
-        }
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="welcome.css">
 
-        #header-text {
-            text-align: left;
-        }
-
-        #main {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
-
-        #signin-form {
-
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /*background-color: white;*/
-            background-color: #ABB2B9;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
-
-        #signin-form input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        #signin-form .button {
-            width: 100%;
-            padding: 10px;
-            /*background-color: #ff9800;*/
-            background-color: #0E6655;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #signin-form .button:hover {
-            /*background-color: #e68900;*/
-            background-color: #218838;
-        }
-    </style>
+    <script src="header.js"></script>
+    <script src="welcome.js"></script>
+    <link rel="icon" type="image/png" href="icon.png">
 </head>
 <body>
-    <div id="header">
-        <img src="icon.png" alt="Logo" id="logo">
-        <div id="header-text">
-            <h1>Welcome</h1>
-            <h4>Please enter your student details</h4>
-        </div>
-    </div>
-    <div id="main">
-        <form id="signin-form" action="/welcome" method="post" enctype="application/x-www-form-urlencoded">
+    <main>
+        <form action="/welcome" method="post" enctype="application/x-www-form-urlencoded">
             <input type="email" id="email" placeholder="Email" name="email" required>
-            <input type="text" id="student-id" placeholder="Student ID" name="sid" required>
             <input type="password" id="passwd" placeholder="Password" name="password" required>
             <input type="password" id="conf-passwd" placeholder="Confirm Password" required>
-            <input type="submit" id="top-button" class="button orange-button" value="Sign In">
-            <button id="btm-button" class="button orange-button"></button>
+            <input type="submit" id="top-button" class="button" value="Sign In">
+            <button id="btm-button" class="button"></button>
         </form>
-    </div>
-
-    <script>
-        window.addEventListener('load', ()=> {
-            // false -> sign in
-            // true  -> sign up
-            let state = true;
-            const mail = document.getElementById("email");
-            const sid = document.getElementById("student-id");
-            const conf_passwd = document.getElementById("conf-passwd");
-            const passwd = document.getElementById("passwd")
-            const top = document.getElementById("top-button");
-            const btm = document.getElementById("btm-button");
-
-            function toggleState() {
-                state = !state;
-                if(state) {
-                    sid.style.setProperty("display", "inherit");
-                    conf_passwd.style.setProperty("display", "inherit");
-                    top.setAttribute("value", "Sign Up");
-                    btm.innerText = "Sign In Instead";
-                    sid.setAttribute("required", "");
-                    sid.setAttribute("name", "sid");
-                    conf_passwd.setAttribute("required", "");
-                } else {
-                    sid.style.setProperty("display", "none");
-                    conf_passwd.style.setProperty("display", "none");
-                    top.setAttribute("value", "Sign In");
-                    btm.innerText = "Sign Up Instead";
-                    sid.removeAttribute("required");
-                    sid.removeAttribute("name");
-                    conf_passwd.removeAttribute("required");
-                }
-            }
-
-            btm.addEventListener("click", (e)=>{
-                e.preventDefault();
-                toggleState();
-            });
-            toggleState();
-
-            // top.addEventListener("click", (e)=> {
-            //     console.log(JSON.stringify({
-            //         id: sid.innerText,
-            //         password: passwd.innerText,
-            //         email: mail.innerText
-            //     }));
-            //     fetch("/welcome", {
-            //         method: "POST",
-            //         headers: {"Content-Type": "application/json"},
-            //         body: JSON.stringify({
-            //             id: sid.innerText,
-            //             password: passwd.innerText,
-            //             email: mail.innerText
-            //         })
-            //     });
-            // });
-        });
-    </script>
-
-    <script>
-        // document.getElementById("signin-form").addEventListener("submit", function(event) {
-        //     event.preventDefault();
-	    // //student values
-        //     var studentID = document.getElementById("student-id").value;
-        //     var username = document.getElementById("username").value;
-        //     var email = document.getElementById("email").value;
-        //
-        //     //HTTP request to server to submit the data
-        //     fetch('/submit', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({
-        //             studentID: studentID,
-        //             username: username,
-        //             email: email
-        //         }),
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         alert("Welcome student!");
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        //     });
-        // });
-    </script>
+    </main>
 </body>
 </html>

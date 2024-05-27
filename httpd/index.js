@@ -1,5 +1,5 @@
 
-window.onload = () => {
+window.addEventListener('load', () => {
     /**
      * @type {HTMLCanvasElement}
      */
@@ -31,7 +31,7 @@ window.onload = () => {
         if(selectedNode !== null) {
             selectedNode.setStyle(selectedStyle);
             selectedNode.draw(g);
-            selectedNode.resetStyle();
+            selectedNode.setStyle(defaultStyle);
         }
     };
 
@@ -41,13 +41,13 @@ window.onload = () => {
             for(let n of obj['nodes']) {
                 const tmp = new Node(new Vector(n['position']['x'], n['position']['y']));
                 tmp.setText(n['text']);
+                tmp.setStyle(defaultStyle);
                 nodes.push(tmp);
             }
 
             for(let e of obj['edges']) {
                 edges.push(new Edge(nodes[e['from']], nodes[e['to']]));
             }
-
             draw();
         });
 
@@ -56,10 +56,14 @@ window.onload = () => {
     let mousedown = false;
     let dragOffset = {x: 0, y: 0};
     let translation = {x: 0, y: 0};
+    let defaultStyle = NodeStyle.default().copy();
+    defaultStyle.backgroundColor = '#ABB2B9';
     let selectedStyle = NodeStyle.default().copy();
+    selectedStyle.borderColor = '#218838';
+    selectedStyle.backgroundColor = '#ABB2B9';
     let selectedNode = null;
     let hovered = false;
-    selectedStyle.borderColor = 'blue';
+
 
     canvas.addEventListener('mousedown', (e)=>{
         mousedown = true;
@@ -112,7 +116,7 @@ window.onload = () => {
                     hovered = true;
                     nodes[i].setStyle(selectedStyle);
                     draw();
-                    nodes[i].resetStyle();
+                    nodes[i].setStyle(defaultStyle);
                     break;
                 }
             }
@@ -121,10 +125,9 @@ window.onload = () => {
             }
         }
     });
-
-    window.onresize = ()=> {
+    window.addEventListener('resize', ()=> {
         canvas.width = canvas.getBoundingClientRect().width;
         canvas.height = canvas.getBoundingClientRect().height;
         draw();
-    };
-}
+    });
+});

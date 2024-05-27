@@ -3,74 +3,65 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Course Manager</title>
+		<title>CS Secure | Manager</title>
+
+		<!-- Import Roboto Font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet" href="styles.css">
 		<link rel="stylesheet" href="courseManager.css"/>
-		<script src="courseManager.js" defer></script>
+
 		<meta name="author" content="Daniel Tongu, daniel.tongu@cwu.edu">
+
+		<script src="header.js"></script>
+		<script src="backend.js"></script>
+		<script src="courseManager.js" defer></script>
+		<link rel="icon" type="image/png" href="icon.png">
 	</head>
 	<body>
-		<h1>Course Manager</h1>
-		<div id="courseCatalog">
-			<h2>Needed</h2>
-			<ul>
-				<li id="MATH172" draggable="true">MATH172</li>
-				<li id="MATH173" draggable="true">MATH173</li>
-				<li id="MATH260" draggable="true">MATH260</li>
-				<li id="MATH330" draggable="true">MATH330</li>
-				<li id="CS110" draggable="true">CS110</li>
-				<li id="CS111" draggable="true">CS111</li>
-				<li id="CS112" draggable="true">CS112</li>
-				<li id="CS301" draggable="true">CS301</li>
-				<li id="CS302" draggable="true">CS302</li>
-				<li id="CS311" draggable="true">CS311</li>
-				<li id="CS312" draggable="true">CS312</li>
-				<li id="CS325" draggable="true">CS325</li>
-				<li id="CS361" draggable="true">CS361</li>
-				<li id="CS362" draggable="true">CS362</li>
-				<li id="CS380" draggable="true">CS380</li>
-				<li id="CS392" draggable="true">CS392</li>
-				<li id="CS420" draggable="true">CS420</li>
-				<li id="CS427" draggable="true">CS427</li>
-				<li id="CS470" draggable="true">CS470</li>
-				<li id="CS480" draggable="true">CS480</li>
-				<li id="CS481" draggable="true">CS481</li>
-				<li id="CS489" draggable="true">CS489</li>
-			</ul>
-		</div>
-		<div id="academicYearPlan">
-			<h2>Yearly Plan</h2>
-			<section id="fall">
-				<header>
-					<button>Set All Completed</button>
-					<h3>Fall</h3>
-				</header>
-				<ul></ul>
-			</section>
-			<section id="winter">
-				<header>
-					<button>Set All Completed</button>
-					<h3>Winter</h3>
-				</header>
-				<ul></ul>
-			</section>
-			<section id="spring">
-				<header>
-					<button>Set All Completed</button>
-					<h3>Spring</h3>
-				</header>
-				<ul></ul>
-			</section>
-			<section id="summer">
-				<header>
-					<button>Set All Completed</button>
-					<h3>Summer</h3>
-				</header>
-				<ul></ul>
-			</section>
-		</div>
-		<div id="completedCourses">
-			<h2>Completed</h2>
-			<ul></ul>
+		<div id="main">
+			<div id="courseCatalog">
+				<h2>Needed</h2>
+				<ul id="needed-list">
+				</ul>
+			</div>
+			<div id="academicYearPlan">
+				<h2>Yearly Plan</h2>
+				<section id="fall">
+					<header>
+						<button class = "button">Set All Completed</button>
+						<h3>Fall</h3>
+					</header>
+					<ul id="fall-list"></ul>
+				</section>
+				<section id="winter">
+					<header>
+						<button class = "button">Set All Completed</button>
+						<h3>Winter</h3>
+					</header>
+					<ul id="winter-list"></ul>
+				</section>
+				<section id="spring">
+					<header>
+						<button class = "button">Set All Completed</button>
+						<h3>Spring</h3>
+					</header>
+					<ul id="spring-list"></ul>
+				</section>
+				<section id="summer">
+					<header>
+						<button class = "button">Set All Completed</button>
+						<h3>Summer</h3>
+					</header>
+					<ul id="summer-list"></ul>
+				</section>
+			</div>
+			<div id="completedCourses">
+				<h2>Completed</h2>
+				<ul id="completed-list"></ul>
+			</div>
 		</div>
 	</body>
 </html>

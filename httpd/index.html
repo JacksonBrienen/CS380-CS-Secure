@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CS Secure</title>
+    <title>CS Secure | Home</title>
     <!-- Import Roboto Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="index.css">
 
+    <script src="header.js"></script>
     <script src="graph/geometry.js"></script>
     <script src="graph/graph.js"></script>
     <script src="index.js"></script>
@@ -19,27 +20,19 @@
     <link rel="icon" type="image/png" href="icon.png">
 </head>
 <body>
-    <div id="header">
-        <img src="icon.png">
-        <h1>CS Secure</h1>
-        <h4>We're Securing your Future</h4>
-    </div>
 
-    <div id="main">
+    <main>
         <h2>See Your Future</h2>
         <div id="class-graph">
             <canvas id="graph-canvas"></canvas>
         </div>
         <h2>Secure Your Future</h2>
         <div id="account-buttons">
-            <button id="sign-in" class="button button-left-tilt green-button" role="button">Sign In</button>
-
-            <!--Horizontal Spacer-->
-            <div style="width: 10px"></div>
-
-            <button id="register" class="button button-right-tilt red-button" role="button">Sign Up</button>
+            <a href = "/welcome">
+                <button id="sign-up" class="button" onclick="">Sign Up</button>
+            </a>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>
