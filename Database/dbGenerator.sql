@@ -16,7 +16,7 @@ ENGINE = InnoDB;
 
 /* basic student information */
 CREATE TABLE IF NOT EXISTS `db`.`student` (
-  `sid` CHAR(8) NOT NULL,
+  `sid` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(256) NOT NULL,
   `password` VARCHAR(512) NOT NULL,
   `planId` INT NOT NULL,
@@ -117,7 +117,7 @@ ENGINE = InnoDB;
 
 /* table for a students currently selected fall classes */
 CREATE TABLE IF NOT EXISTS `db`.`fall` (
-  `sid` CHAR(8) NOT NULL,
+  `sid` INT NOT NULL,
   `course` VARCHAR(16) NOT NULL,
   PRIMARY KEY (`sid`, `course`),
   INDEX `fall_course_fk_idx` (`course` ASC) VISIBLE,
@@ -135,7 +135,7 @@ ENGINE = InnoDB;
 
 /* table for a students currently selected winter classes */
 CREATE TABLE IF NOT EXISTS `db`.`winter` (
-  `sid` CHAR(8) NOT NULL,
+  `sid` INT NOT NULL,
   `course` VARCHAR(16) NOT NULL,
   PRIMARY KEY (`sid`, `course`),
   INDEX `fall_course_fk_idx` (`course` ASC) VISIBLE,
@@ -153,7 +153,7 @@ ENGINE = InnoDB;
 
 /* table for a students currently selected spring classes */
 CREATE TABLE IF NOT EXISTS `db`.`spring` (
-  `sid` CHAR(8) NOT NULL,
+  `sid` INT NOT NULL,
   `course` VARCHAR(16) NOT NULL,
   PRIMARY KEY (`sid`, `course`),
   INDEX `fall_course_fk_idx` (`course` ASC) VISIBLE,
@@ -171,7 +171,7 @@ ENGINE = InnoDB;
 
 /* table for a students currently selected summer classes */
 CREATE TABLE IF NOT EXISTS `db`.`summer` (
-  `sid` CHAR(8) NOT NULL,
+  `sid` INT NOT NULL,
   `course` VARCHAR(16) NOT NULL,
   PRIMARY KEY (`sid`, `course`),
   INDEX `fall_course_fk_idx` (`course` ASC) VISIBLE,
@@ -189,7 +189,7 @@ ENGINE = InnoDB;
 
 /* table for a students currently selected completed classes */
 CREATE TABLE IF NOT EXISTS `db`.`completed` (
-  `sid` CHAR(8) NOT NULL,
+  `sid` INT NOT NULL,
   `course` VARCHAR(16) NOT NULL,
   PRIMARY KEY (`sid`, `course`),
   INDEX `fall_course_fk_idx` (`course` ASC) VISIBLE,
@@ -207,7 +207,7 @@ ENGINE = InnoDB;
 
 /* table for which course(s) a student has selected for a multicourse */
 CREATE TABLE IF NOT EXISTS `db`.`multicourseSelection` (
-  `sid` CHAR(8) NOT NULL,
+  `sid` INT NOT NULL,
   `mutlicourse` VARCHAR(16) NOT NULL,
   `course` VARCHAR(16) NOT NULL,
   PRIMARY KEY (`sid`, `mutlicourse`),
@@ -234,57 +234,57 @@ ENGINE = InnoDB;
    Initially ran with FK checks on to ensure database functionality 
  */
 SET FOREIGN_KEY_CHECKS=0;
-INSERT INTO db.plans VALUES (0, "Computer Science B.S.");
+INSERT INTO db.plans (planName) VALUES ("Computer Science B.S.");
 INSERT INTO db.course VALUES ("CS110", "Programming Fundamentals I", "Fundamental concepts of programming from an object-oriented perspective. Classes, objects and methods, algorithm development, problem-solving techniques, basic control structures, primitive types and arrays.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256150", 4);
-INSERT INTO db.planReq VALUES (0, "CS110");
+INSERT INTO db.planReq VALUES (1, "CS110");
 INSERT INTO db.course VALUES ("CS111", "Programming Fundamentals II", "Continuation of object-oriented programming concepts introduced in CS 110. Inheritance, exceptions, graphical user interfaces, recursion, and data structures.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256151", 4);
-INSERT INTO db.planReq VALUES (0, "CS111");
+INSERT INTO db.planReq VALUES (1, "CS111");
 INSERT INTO db.course VALUES ("CS112", "Introduction to Data Science in Python", "This course is an introduction to the Python programming language with the following Data Science topics; data pre-processing, working with categorical and textual data, data parsing, data and natural language processing and data visualization.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256152", 4);
-INSERT INTO db.planReq VALUES (0, "CS112");
+INSERT INTO db.planReq VALUES (1, "CS112");
 INSERT INTO db.course VALUES ("CS301", "Data Structures", "Introduction to elementary data structures (arrays, lists, stacks, queues, deques, binary trees) and their Java implementation as abstract data types.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256156", 4);
-INSERT INTO db.planReq VALUES (0, "CS301");
+INSERT INTO db.planReq VALUES (1, "CS301");
 INSERT INTO db.course VALUES ("CS302", "Advanced Data Structures and File Processing", "Introduction to non-linear data structures (balanced search trees, priority queues, graphs, maps, sets, hashing data structures), their Java implementations as abstract data types, and basic algorithms (sorting, greedy, graph algorithms).", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256157", 4);
-INSERT INTO db.planReq VALUES (0, "CS302");
+INSERT INTO db.planReq VALUES (1, "CS302");
 INSERT INTO db.course VALUES ("CS311", "Computer Architecture I", "Introduction to computer architecture, data representations, assembly language, addressing techniques. Course will be offered every year. Course will not have an established scheduling pattern.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256158", 4);
-INSERT INTO db.planReq VALUES (0, "CS311");
+INSERT INTO db.planReq VALUES (1, "CS311");
 INSERT INTO db.course VALUES ("CS312", "Computer Architecture II", "Introduction to the structure of computers. Digital circuits, central processing units, memory, input/output processing, parallel architectures. Course will be offered every year.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256159", 4);
-INSERT INTO db.planReq VALUES (0, "CS312");
+INSERT INTO db.planReq VALUES (1, "CS312");
 INSERT INTO db.course VALUES ("CS325", "Technical Writing in Computer Science", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256160", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256160", 4);
-INSERT INTO db.planReq VALUES (0, "CS325");
+INSERT INTO db.planReq VALUES (1, "CS325");
 INSERT INTO db.course VALUES ("CS361", "Principles of Language Design I", "Topics will include evolution of programming languages, syntax and semantics, bindings, scoping, data types, assignment, control, and subprograms.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256163", 4);
-INSERT INTO db.planReq VALUES (0, "CS361");
+INSERT INTO db.planReq VALUES (1, "CS361");
 INSERT INTO db.course VALUES ("CS362", "Principles of Language Design II", "Topics will include abstract data types, parallel processing, object-oriented programming, exception handling functional programming, and logic programming. Course will be offered every year. Course will not have an established scheduling pattern.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256164", 4);
-INSERT INTO db.planReq VALUES (0, "CS362");
+INSERT INTO db.planReq VALUES (1, "CS362");
 INSERT INTO db.course VALUES ("CS380", "Introduction to Software Engineering", "An introduction to the principles and practices of software engineering, including object-oriented analysis and design, design patterns, and testing. Course will not have an established scheduling pattern.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256179", 4);
-INSERT INTO db.planReq VALUES (0, "CS380");
+INSERT INTO db.planReq VALUES (1, "CS380");
 INSERT INTO db.course VALUES ("CS392", "Practical Experience in Debugging Computer Code", "Mentored experience in applying techniques and providing feedback for debugging computer code.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256167", 1);
-INSERT INTO db.planReq VALUES (0, "CS392");
+INSERT INTO db.planReq VALUES (1, "CS392");
 INSERT INTO db.course VALUES ("CS420", "Database Management Systems", "Logical aspects of database processing; concepts of organizing data into integrated databases; hierarchical, network, and relational approaches.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256168", 4);
-INSERT INTO db.planReq VALUES (0, "CS420");
+INSERT INTO db.planReq VALUES (1, "CS420");
 INSERT INTO db.course VALUES ("CS427", "Algorithm Analysis", "Topics will include basic algorithmic analysis, algorithmic strategies, fundamental computing algorithms, basic computability, the complexity classes P and NP, and advanced algorithmic analysis.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256169", 4);
-INSERT INTO db.planReq VALUES (0, "CS427");
+INSERT INTO db.planReq VALUES (1, "CS427");
 INSERT INTO db.course VALUES ("CS450", "Computer Network and Data Communications", "The course deals with networking and data communication utilizing the concepts of device and network protocols, network configurations, encryption, data compression and security.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256175", 4);
-INSERT INTO db.planReq VALUES (0, "CS450");
+INSERT INTO db.planReq VALUES (1, "CS450");
 INSERT INTO db.course VALUES ("CS470", "Operating Systems", "Topics will include principles of operating systems, concurrency, scheduling and dispatch, memory management, processes and threads, device management, security and protection, and file systems.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256180", 4);
-INSERT INTO db.planReq VALUES (0, "CS470");
+INSERT INTO db.planReq VALUES (1, "CS470");
 INSERT INTO db.course VALUES ("CS480", "Advanced Software Engineering", "Advanced principles and practices of software engineering, including project management, requirements gathering and specification, design, coding, testing, maintenance and documentation. Students work in teams to develop a large software project.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256182", 4);
-INSERT INTO db.planReq VALUES (0, "CS480");
+INSERT INTO db.planReq VALUES (1, "CS480");
 INSERT INTO db.course VALUES ("CS481", "Capstone Project", "The computer science capstone project and culminating experience. Students will work in teams to develop and deploy a project reflecting an objective in the computer science field dealing with either industrial or research aspects.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256183", 4);
-INSERT INTO db.planReq VALUES (0, "CS481");
+INSERT INTO db.planReq VALUES (1, "CS481");
 INSERT INTO db.course VALUES ("CS489", "Senior Colloquium", "Investigation of ethical and historical topics provides a culminating experience in computer science. Students make connections between computer science and their General Education experiences. Concepts, principles and knowledge in the field are assessed.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256184", 1);
-INSERT INTO db.planReq VALUES (0, "CS489");
+INSERT INTO db.planReq VALUES (1, "CS489");
 INSERT INTO db.course VALUES ("CS492", "Laboratory Experience in Teaching Computer Science", "Supervised progressive experience in developing procedures and techniques in teaching computer science.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256187", 2);
-INSERT INTO db.planReq VALUES (0, "CS492");
+INSERT INTO db.planReq VALUES (1, "CS492");
 INSERT INTO db.course VALUES ("MATH153", "Pre-Calculus Mathematics I", "A foundation course which stresses those algebraic and elementary function concepts together with the manipulative skills essential to the study of calculus.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=257139", 5);
 INSERT INTO db.course VALUES ("MATH154", "Pre-Calculus Mathematics II", "A continuation of MATH 153 with emphasis on trigonometric functions, vectors, systems of equations, the complex numbers, and an introduction to analytic geometry.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=257140", 5);
 INSERT INTO db.course VALUES ("MATH172", "Calculus I", "Theory, techniques, and applications of differentiation and integration of the elementary functions.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=257143", 5);
-INSERT INTO db.planReq VALUES (0, "MATH172");
+INSERT INTO db.planReq VALUES (1, "MATH172");
 INSERT INTO db.course VALUES ("MATH173", "Calculus II", "Theory, techniques, and applications of differentiation and integration of the elementary functions.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=257144", 5);
-INSERT INTO db.planReq VALUES (0, "MATH173");
+INSERT INTO db.planReq VALUES (1, "MATH173");
 INSERT INTO db.course VALUES ("MATH260", "Sets and Logic", "Essentials of mathematical proofs, including use of quantifiers and principles of valid inference. Set theory as a mathematical system.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=257147", 5);
-INSERT INTO db.planReq VALUES (0, "MATH260");
+INSERT INTO db.planReq VALUES (1, "MATH260");
 INSERT INTO db.course VALUES ("MATH330", "Discrete Mathematics", "Topics from logic, combinatorics, counting techniques, graph theory, and theory of finite-state machines.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=257159", 5);
-INSERT INTO db.planReq VALUES (0, "MATH330");
+INSERT INTO db.planReq VALUES (1, "MATH330");
 INSERT INTO db.course VALUES ("AW1", "Academic Writing I", "Academic Writing I prepares students with the skills necessary for critical reading and academic writing, including summarizing, reading sources critically and responding to them, synthesizing multiple perspectives, and using academic writing conventions, including grammar and mechanics.", "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#AcademicWritingICriticalReadingAndRespondingCredits5", NULL);
 INSERT INTO db.genEd VALUES ("AW1");
 INSERT INTO db.course VALUES ("DHC102", "Articulating Honors: Research Writing in the Twenty-First Century", "Introduces students to the academic expectations for DHC students; including writing essays, giving presentations, joining class discussions, and conducting research. Examines the philosophy, history, and debates surrounding honors education today, ultimately entering the discussion themselves. May be repeated for credit.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=259810", 5);
@@ -352,7 +352,15 @@ INSERT INTO db.course VALUES ("RELS103", "World Mythologies", "An overview of wo
 INSERT INTO db.course VALUES ("WLC311", "Popular Cultures of the World", "This online course examines popular culture as a reflection of ideologies and value systems in different societies and cultural contexts. Course will not have an established scheduling pattern.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=258504", 5);
 INSERT INTO db.course VALUES ("K5", "Humanities", "The humanities perspective focuses on helping students interpret their world, culture, and perspectives through the study of philosophical, literary, and historical forms.", "https://catalog.acalog.cwu.edu/preview_program.php?catoid=74&poid=16709#K5Humanities", NULL);
 INSERT INTO db.genEd VALUES ("K5");
-INSERT INTO db.course VALUES ("DHC140", "Humanistic Understanding", "Courses in the humanities focuses on the analysis and interpretation of human stories of the past, present, and future in order to understand the processes of continuity and change in individuals and cultures through both documented and imaginative accounts.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256194", 5);
+INSERT INTO db.course VALUES ("DHC140", "Humanistic Understanding", "
+Add to My Favorites (opens a new window)
+Share this Page
+Print (opens a new window)
+Help (opens a new window)
+Add to Portfolio (opens a new window)
+DHC 140 - Humanistic Understanding
+Description:
+Variable topic. Courses in the humanities focuses on the analysis and interpretation of human stories of the past, present, and future in order to understand the processes of continuity and change in individuals and cultures through both documented and imaginative accounts.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256194", 5);
 INSERT INTO db.course VALUES ("HIST102", "World History: 1500-1815", "A comparative survey of political, social, economic, and cultural developments in world history from 1500-1815.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256873", 5);
 INSERT INTO db.course VALUES ("HIST301", "Pacific Northwest History", "Exploration and settlement; subsequent political, economic, and social history with particular emphasis on Washington.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256878", 5);
 INSERT INTO db.course VALUES ("HUM101", "Exploring Cultures in the Ancient World", "An interdisciplinary exploration from literature, history, philosophy, and the arts of selected major ancient civilizations in Asia, Africa, Europe, and/or the Americas from their beginnings through the 15th century.", "https://catalog.acalog.cwu.edu/preview_course_nopop.php?catoid=89&coid=256943", 5);
