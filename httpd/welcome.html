@@ -95,10 +95,10 @@
         </div>
     </div>
     <div id="main">
-        <form id="signin-form">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="text" id="student-id" placeholder="Student ID" required>
-            <input type="password" id="passwd" placeholder="Password" required>
+        <form id="signin-form" action="/welcome" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="email" id="email" placeholder="Email" name="email" required>
+            <input type="text" id="student-id" placeholder="Student ID" name="sid" required>
+            <input type="password" id="passwd" placeholder="Password" name="password" required>
             <input type="password" id="conf-passwd" placeholder="Confirm Password" required>
             <input type="submit" id="top-button" class="button orange-button" value="Sign In">
             <button id="btm-button" class="button orange-button"></button>
@@ -110,9 +110,10 @@
             // false -> sign in
             // true  -> sign up
             let state = true;
-
+            const mail = document.getElementById("email");
             const sid = document.getElementById("student-id");
             const conf_passwd = document.getElementById("conf-passwd");
+            const passwd = document.getElementById("passwd")
             const top = document.getElementById("top-button");
             const btm = document.getElementById("btm-button");
 
@@ -136,37 +137,54 @@
                 toggleState();
             });
             toggleState();
+
+            // top.addEventListener("click", (e)=> {
+            //     console.log(JSON.stringify({
+            //         id: sid.innerText,
+            //         password: passwd.innerText,
+            //         email: mail.innerText
+            //     }));
+            //     fetch("/welcome", {
+            //         method: "POST",
+            //         headers: {"Content-Type": "application/json"},
+            //         body: JSON.stringify({
+            //             id: sid.innerText,
+            //             password: passwd.innerText,
+            //             email: mail.innerText
+            //         })
+            //     });
+            // });
         });
     </script>
 
     <script>
-        document.getElementById("signin-form").addEventListener("submit", function(event) {
-            event.preventDefault();
-	    //student values
-            var studentID = document.getElementById("student-id").value;
-            var username = document.getElementById("username").value;
-            var email = document.getElementById("email").value;
-
-            //HTTP request to server to submit the data
-            fetch('/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    studentID: studentID,
-                    username: username,
-                    email: email
-                }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Welcome student!");
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-        });
+        // document.getElementById("signin-form").addEventListener("submit", function(event) {
+        //     event.preventDefault();
+	    // //student values
+        //     var studentID = document.getElementById("student-id").value;
+        //     var username = document.getElementById("username").value;
+        //     var email = document.getElementById("email").value;
+        //
+        //     //HTTP request to server to submit the data
+        //     fetch('/submit', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify({
+        //             studentID: studentID,
+        //             username: username,
+        //             email: email
+        //         }),
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         alert("Welcome student!");
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error:', error);
+        //     });
+        // });
     </script>
 </body>
 </html>
