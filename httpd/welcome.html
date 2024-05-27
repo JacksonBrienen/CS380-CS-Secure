@@ -124,11 +124,17 @@
                     conf_passwd.style.setProperty("display", "inherit");
                     top.setAttribute("value", "Sign Up");
                     btm.innerText = "Sign In Instead";
+                    sid.setAttribute("required", "");
+                    sid.setAttribute("name", "sid");
+                    conf_passwd.setAttribute("required", "");
                 } else {
                     sid.style.setProperty("display", "none");
                     conf_passwd.style.setProperty("display", "none");
                     top.setAttribute("value", "Sign In");
                     btm.innerText = "Sign Up Instead";
+                    sid.removeAttribute("required");
+                    sid.removeAttribute("name");
+                    conf_passwd.removeAttribute("required");
                 }
             }
 
