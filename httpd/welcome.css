@@ -33,3 +33,22 @@ form input:focus {
     color: white;
     cursor: pointer;
 }
+
+#info {
+    margin-top: -20px;
+    text-align: center;
+}
+
+#info > * {
+    margin-bottom: 20px;
+    font-size: 0.9em;
+}
+
+a {
+    text-decoration: underline;
+    color: blue;
+}
+
+a:hover {
+    cursor: pointer;
+}
