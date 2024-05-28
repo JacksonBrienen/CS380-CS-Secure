@@ -38,8 +38,30 @@ window.addEventListener("load", ()=> {
     completedList.addEventListener('drop', drop);
     completedList.addEventListener('dragover', dragOver);
 
+    function readMultiselects(selects) {
+        fetch('/manager/multiselection', {
+            method: 'GET',
+            headers: {
+                'Auth-Token': token
+            }
+        }).then((res) => {
+            if(res.ok) {
+                res.json().then(json => {
+                    for(const [key, value] of Object.entries(json)) {
+                        console.log(key);
+                        selects[key].elem.value = value;
+                        selects[key].update();
+                    }
+                });
+            } else {
+                window.location.replace("/welcome");
+            }
+        });
+    }
+
+    const multiSelects = {};
     function readData(list, url) {
-        fetch(url, {
+        return fetch(url, {
             method: 'GET',
             headers: {
                 'Auth-Token': token
@@ -59,6 +81,87 @@ window.addEventListener("load", ()=> {
                                 opt.innerText = c[0];
                                 select.appendChild(opt);
                             }
+                            multiSelects[key] =
+                            {
+                                elem: select,
+                                update: function() {
+                                    for(let i = 0; i < json[key].courses.length; i++) {
+                                        if(select.value === json[key].courses[i][0]) {
+                                            for(let n = 1; n < json[key].courses[i].length; n++) {
+                                                if(quarterLists[0].querySelector(`#${json[key].courses[i][n]}`) === null &&
+                                                    quarterLists[1].querySelector(`#${json[key].courses[i][n]}`) === null &&
+                                                    quarterLists[2].querySelector(`#${json[key].courses[i][n]}`) === null &&
+                                                    quarterLists[3].querySelector(`#${json[key].courses[i][n]}`) === null &&
+                                                    completedList.querySelector(`#${json[key].courses[i][n]}`) === null) {
+                                                    const e = document.createElement("li");
+                                                    e.textContent = json[key].courses[i][n];
+                                                    e.setAttribute("id", json[key].courses[i][n]);
+                                                    e.setAttribute('draggable', 'true');
+                                                    e.addEventListener('dragstart', (e) => {
+                                                        e.dataTransfer.setData('text', e.target.id);
+                                                    });
+                                                    neededList.appendChild(e);
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            };
+                            select.addEventListener('change', function() {
+                                fetch(`/manager/multiselection/${li.id}/${select.value}`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Auth-Token': token
+                                    }
+                                }).then(res => {
+                                    if(res.ok) {
+                                        console.log('multi set');
+                                    } else {
+                                        console.log('multi not set');
+                                    }
+                                });
+                            })
+                            select.addEventListener("change", function() {
+                                for(let i = 0; i < json[key].courses.length; i++) {
+                                    const lists = document.getElementsByTagName("ul");
+                                    for(let n = 1; n < json[key].courses[i].length; n++) {
+                                        const e = document.getElementById(json[key].courses[i][n]);
+                                        for (let k = 0; k < lists.length; k++) {
+                                            if (lists.item(k).contains(e)) {
+                                                lists.item(k).removeChild(e);
+                                                fetch(`/manager/needed/${json[key].courses[i][n]}`, {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Auth-Token': token
+                                                    }
+                                                }).then(res => {
+                                                    if(res.ok) {
+                                                        console.log('good move');
+                                                    } else {
+                                                        console.log('bad move');
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                                for(let i = 0; i < json[key].courses.length; i++) {
+                                    if(select.value === json[key].courses[i][0]) {
+                                        for(let n = 1; n < json[key].courses[i].length; n++) {
+                                            const e = document.createElement("li");
+                                            e.textContent = json[key].courses[i][n];
+                                            e.setAttribute("id", json[key].courses[i][n]);
+                                            e.setAttribute('draggable', 'true');
+                                            e.addEventListener('dragstart', (e) => {
+                                                e.dataTransfer.setData('text', e.target.id);
+                                            });
+                                            neededList.appendChild(e);
+                                        }
+                                        break;
+                                    }
+                                }
+                            });
                             li.appendChild(select);
                         } else {
                             li.innerText = key;
@@ -77,134 +180,18 @@ window.addEventListener("load", ()=> {
         });
     }
 
-    readData(neededList, '/manager/needed');
-    readData(quarterLists[0], '/manager/fall');
-    readData(quarterLists[1], '/manager/winter');
-    readData(quarterLists[2], '/manager/spring');
-    readData(quarterLists[3], '/manager/summer');
-    readData(completedList, '/manager/completed');
-
-    // console.log(document.cookie);
-    // const courseList = document.querySelectorAll("#courseCatalog ul").item(0);
-    // getCourses().then(/** @type {Course[]}*/ courses => {
-    //     for(const [key, c] of Object.entries(courses)) {
-    //         if(c.majorRequirement) {
-    //             /** @type {HTMLLIElement} */
-    //             const e = document.createElement("li");
-    //             e.textContent = key;
-    //             e.setAttribute("id", key);
-    //             e.setAttribute("draggable", "true");
-    //             courseList.appendChild(e);
-    //         } else if(c.genEd && c.multiCourse) {
-    //             /** @type {MultiCourse} */
-    //             const multiCourse = c;
-    //             const listItem = document.createElement("li");
-    //             listItem.setAttribute("id", key);
-    //             listItem.setAttribute("draggable", "false");
-    //             listItem.addEventListener('dragstart', dragStart);
-    //             listItem.addEventListener('dragend', dragEnd);
-    //             const selectElem = document.createElement("select");
-    //             listItem.addEventListener('dragend', (event)=> {
-    //                 if(listItem.parentElement.id === "needed-list") {
-    //                     for(let i = 0; i < selectElem.length; i++) {
-    //                         selectElem.item(i).removeAttribute("disabled");
-    //                     }
-    //                 } else if (listItem.parentElement.id === "completed-list") {
-    //                     for(let i = 0; i < selectElem.length; i++) {
-    //                         selectElem.item(i).setAttribute("disabled", "");
-    //                     }
-    //                 } else {
-    //                     selectElem.item(0).setAttribute("disabled", "");
-    //                     for(let i = 1; i < selectElem.length; i++) {
-    //                         selectElem.item(i).removeAttribute("disabled");
-    //                     }
-    //                 }
-    //             });
-    //             const baseOpt = document.createElement("option");
-    //             baseOpt.style.backgroundColor = 'grey';
-    //             baseOpt.innerText = key;
-    //             selectElem.appendChild(baseOpt);
-    //             selectElem.addEventListener("change", function() {
-    //                 if(selectElem.value === key) {
-    //                     listItem.style.backgroundColor = 'grey';
-    //                     selectElem.style.backgroundColor = 'grey';
-    //                     listItem.setAttribute("draggable", "false");
-    //                 } else {
-    //                     listItem.style.backgroundColor = 'white';
-    //                     selectElem.style.backgroundColor = 'inherit';
-    //                     listItem.setAttribute("draggable", "true");
-    //                 }
-    //             });
-    //             listItem.style.backgroundColor = 'grey';
-    //             selectElem.style.backgroundColor = 'grey';
-    //             for(const courseArray of multiCourse.courses) {
-    //                 if(courseArray.length > 0) {
-    //                     if(courseArray.length > 1) {
-    //                         selectElem.addEventListener("change", function() {
-    //                             if(selectElem.value === courseArray[0])
-    //                             {
-    //                                 for(let i = 1; i < courseArray.length; i++) {
-    //                                     const e = document.createElement("li");
-    //                                     e.textContent = courseArray[i];
-    //                                     e.setAttribute("id", courseArray[i]);
-    //                                     e.setAttribute("draggable", "true");
-    //                                     e.addEventListener('dragstart', dragStart);
-    //                                     e.addEventListener('dragend', dragEnd);
-    //                                     courseList.appendChild(e);
-    //                                 }
-    //                             } else if(selectElem.value !== courseArray[0]) {
-    //                                 for(let i = 1; i < courseArray.length; i++) {
-    //                                     const lists = document.getElementsByTagName("ul");
-    //                                     const e = document.getElementById(courseArray[i]);
-    //                                     for(let k = 0; k < lists.length; k++) {
-    //                                         if(lists.item(k).contains(e)) {
-    //                                             lists.item(k).removeChild(e);
-    //                                         }
-    //                                     }
-    //                                 }
-    //                             }
-    //                         });
-    //                     }
-    //                     const opt = document.createElement("option");
-    //                     opt.innerText = courseArray[0];
-    //                     selectElem.appendChild(opt);
-    //                     // for(const course of courseArray) {
-    //                     //
-    //                     // }
-    //                 }
-    //
-    //
-    //             }
-    //             listItem.appendChild(selectElem);
-    //             courseList.appendChild(listItem);
-    //         }
-    //
-    //     }
-    // }).then(()=> {
-    //     setupEventListeners();
-    //     addDragAndDropHandlers();
-    // });
+    Promise.all(
+        [readData(neededList, '/manager/needed'),
+        readData(quarterLists[0], '/manager/fall'),
+        readData(quarterLists[1], '/manager/winter'),
+        readData(quarterLists[2], '/manager/spring'),
+        readData(quarterLists[3], '/manager/summer'),
+        readData(completedList, '/manager/completed')]
+    ).then(() => {
+        readMultiselects(multiSelects);
+    });
+    setupEventListeners();
 });
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     // const courseList = document.querySelectorAll("#courseCatalog ul").item(0);
-//     // getCourses().then(/** @type {Course[]}*/ courses => {
-//     //     for(const [key, c] of Object.entries(courses)) {
-//     //         //if(c.majorRequirement) {
-//     //             /** @type {HTMLLIElement} */
-//     //             const e = document.createElement("li");
-//     //             e.textContent = key;
-//     //             e.setAttribute("draggable", "true");
-//     //             courseList.appendChild(e);
-//     //
-//     //         //}
-//     //     }
-//     //     setupEventListeners();
-//     //     addDragAndDropHandlers();
-//     // });
-//     setupEventListeners();
-//     addDragAndDropHandlers();
-// });
 
 /**
  * Custom helper function for querySelectorAll specific to courseManager.
@@ -347,7 +334,18 @@ function completeCourses(season) {
     const courses = courseList.querySelectorAll('li[draggable="true"]');
 
     courses.forEach(course => {
-        course.setAttribute('draggable', 'true');
+        fetch(`/manager/completed/${course.id}`, {
+            method: 'POST',
+            headers: {
+                'Auth-Token': token
+            }
+        }).then(res => {
+            if(res.ok) {
+                console.log('good move');
+            } else {
+                console.log('bad move');
+            }
+        });
         completedSection.appendChild(course);
     });
 }

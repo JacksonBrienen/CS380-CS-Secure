@@ -249,51 +249,7 @@ app.get('/manager/needed', (req, res) => {
     }
 });
 
-app.get('/manager/:season', (req, res, next) => {
-    switch(req.params.season) {
-        case 'fall':
-        case 'winter':
-        case 'spring':
-        case 'summer':
-        case 'completed':
-            const token = req.get('Auth-Token');
-            if(token === undefined) {
-                res.sendStatus(400);
-            } else {
-                jwt.decodeJWT(token, (success, obj) => {
-                    if (success) {
-                        db.studentId(obj.email, obj.password, (success, sid) => {
-                            if (success) {
-                                db.completed(req.params.season, sid, (success, obj1) => {
-                                    if(success) {
-                                        db.completedMulti(req.params.season, sid, (success, obj2) => {
-                                            if(success) {
-                                                res.status(200);
-                                                res.type('json');
-                                                res.send({...obj1, ...obj2});
-                                            } else {
-                                                res.sendStatus(400);
-                                            }
-                                        });
-                                    } else {
-                                        res.sendStatus(400);
-                                    }
-                                });
-                            } else {
-                                res.sendStatus(400);
-                            }
-                        });
-                    } else {
-                        res.sendStatus(400);
-                    }
-                });
-            }
-            break;
-        default:
-            res.sendStatus(404);
-            break;
-    }
-});
+
 
 app.post('/manager/needed/:course', (req, res, next) => {
     const token = req.get('Auth-Token');
@@ -322,6 +278,64 @@ app.post('/manager/needed/:course', (req, res, next) => {
     }
 });
 
+app.get('/manager/multiselection',(req, res) => {
+    const token = req.get('Auth-Token');
+    if(token === undefined) {
+        res.sendStatus(400);
+    } else {
+        jwt.decodeJWT(token, (success, obj) => {
+            if (success) {
+                db.studentId(obj.email, obj.password, (success, sid) => {
+                    if(success) {
+                        db.getMulti(sid, (success, obj) => {
+                            if(success) {
+                                res.status(200);
+                                res.type('json');
+                                res.send(obj);
+                            } else {
+                                res.sendStatus(400);
+                            }
+                        });
+                    } else {
+                        res.sendStatus(400);
+                    }
+                });
+            } else {
+                res.sendStatus(400);
+            }
+        });
+    }
+});
+
+app.post('/manager/multiselection/:multi/:course', (req, res) => {
+    const token = req.get('Auth-Token');
+    if(token === undefined) {
+        res.sendStatus(400);
+    } else {
+        jwt.decodeJWT(token, (success, obj) => {
+            if (success) {
+                db.studentId(obj.email, obj.password, (success, sid) => {
+                    if(success) {
+                        db.setMulti(req.params.multi, req.params.course, sid, (success)=> {
+                            if(success) {
+                                res.sendStatus(200);
+                            } else {
+                                res.sendStatus(400);
+                            }
+                        });
+                    } else {
+                        console.log('here2');
+                        res.sendStatus(400);
+                    }
+                });
+            } else {
+                console.log('here3');
+                res.sendStatus(400);
+            }
+        });
+    }
+});
+
 app.post('/manager/:season/:course', (req, res, next) => {
     switch(req.params.season) {
         case 'fall':
@@ -340,6 +354,52 @@ app.post('/manager/:season/:course', (req, res, next) => {
                                 db.addCompleted(req.params.season, req.params.course, sid, (success) => {
                                     if(success) {
                                         res.sendStatus(200);
+                                    } else {
+                                        res.sendStatus(400);
+                                    }
+                                });
+                            } else {
+                                res.sendStatus(400);
+                            }
+                        });
+                    } else {
+                        res.sendStatus(400);
+                    }
+                });
+            }
+            break;
+        default:
+            res.sendStatus(404);
+            break;
+    }
+});
+
+app.get('/manager/:season', (req, res, next) => {
+    switch(req.params.season) {
+        case 'fall':
+        case 'winter':
+        case 'spring':
+        case 'summer':
+        case 'completed':
+            const token = req.get('Auth-Token');
+            if(token === undefined) {
+                res.sendStatus(400);
+            } else {
+                jwt.decodeJWT(token, (success, obj) => {
+                    if (success) {
+                        db.studentId(obj.email, obj.password, (success, sid) => {
+                            if (success) {
+                                db.completed(req.params.season, sid, (success, obj1) => {
+                                    if(success) {
+                                        db.completedMulti(req.params.season, sid, (success, obj2) => {
+                                            if(success) {
+                                                res.status(200);
+                                                res.type('json');
+                                                res.send({...obj1, ...obj2});
+                                            } else {
+                                                res.sendStatus(400);
+                                            }
+                                        });
                                     } else {
                                         res.sendStatus(400);
                                     }

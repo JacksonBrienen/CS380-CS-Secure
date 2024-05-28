@@ -265,6 +265,62 @@ exports.addCompleted = function addCompleted(table, id, sid, cb) {
     });
 }
 
+exports.getMulti = function getMulti(sid, cb) {
+    connection.query(
+        'SELECT mutlicourse, course FROM db.multicourseSelection WHERE sid = ?',
+        [sid],
+        (err, res) => {
+            if(err) {
+                cb(false, undefined);
+            } else {
+                const courses = {}
+                for(const row of res) {
+                    courses[row.mutlicourse] = row.course;
+                }
+                cb(true, courses);
+            }
+        }
+    );
+}
+
+exports.setMulti = function setMulti(multiId, id, sid, cb) {
+    if(id === multiId) {
+        connection.query(
+            'DELETE FROM db.multicourseSelection WHERE sid = ? AND mutlicourse = ?', // fricken typo in db, too lazy to fix
+            [sid, multiId],
+            (err, res) => {
+                if(err) {
+                    cb(false);
+                } else {
+                    cb(true);
+                }
+            }
+        );
+    } else {
+        connection.query(
+            'INSERT INTO db.multicourseSelection VALUES (?, ?, ?)',
+            [sid, multiId, id],
+            (err, res) => {
+                if(err) {
+                    connection.query(
+                        'UPDATE db.multicourseSelection SET course = ? WHERE sid = ? AND mutlicourse = ?',
+                        [id, sid, multiId],
+                        (err, res) => {
+                            if(err) {
+                                cb(false);
+                            } else {
+                                cb(true);
+                            }
+                        }
+                    );
+                } else {
+                    cb(true);
+                }
+            }
+        );
+    }
+}
+
 
 
 // exports.addStudent("email@email.com", "password", (success, errno, err) => {
