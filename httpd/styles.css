@@ -69,3 +69,44 @@ main {
 .button:hover {
     background-color: var(--green-highlight);
 }
+
+nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 130px;
+    height: 40px;
+}
+
+.nav-button {
+    width: 40px;
+    height: 40px;
+}
+
+.nav-button:hover {
+    cursor: pointer;
+}
+
+.account {
+    content: url('icons/account40x40.png');
+}
+
+.account:hover {
+    content: url('icons/account40x40_hover.png');
+}
+
+.login {
+    content: url('icons/login40x40.png');
+}
+
+.login:hover {
+    content: url('icons/login40x40_hover.png');
+}
+
+.home {
+    content: url('icons/home40x40.png');
+}
+
+.home:hover {
+    content: url('icons/home40x40_hover.png');
+}
