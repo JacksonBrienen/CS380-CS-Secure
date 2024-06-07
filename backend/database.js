@@ -16,6 +16,14 @@ connection.connect((err) => {
     console.log('Connected to MySql');
 });
 
+// restarts the connection if it closes
+connection.on('close', ()=> {
+    connection.connect((err) => {
+        if(err) throw err;
+        console.log('Connected to MySql');
+    });
+});
+
 /**
  * Callback to ensure an email does not already exist in the database
  * @callback emailCB
