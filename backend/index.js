@@ -6,6 +6,9 @@
 
 // Requires express, body-parser, and mysql packages to run
 
+// for using node js as direct host
+// const https = require("https");
+
 // import and run express to create server
 const app = require("express")();
 
@@ -432,5 +435,12 @@ app.get('*', function(req, res){
     }
 });
 
-// bind server to port 3000
+// bind server to port 3000 if using as a proxy with some other web server (i.e. apache, nginx, etc.)
+// this is not the current config, so file serving methods should probably be changed
+// but this is the better way to do this
 app.listen(3000);
+
+// alternatively use node js directly as web server
+// const privateKey = fs.readFileSync('../ssl/server.key');
+// const certificate = fs.readFileSync('../ssl/server.cert');
+// const server = https.createServer({key: privateKey, cert: certificate}, app);
