@@ -49,13 +49,13 @@ CREATE TABLE IF NOT EXISTS `db`.`multicourse` (
   `courseIndex` INT NOT NULL,
   `courseId` VARCHAR(16) NOT NULL,
   PRIMARY KEY (`courseList`, `id`, `courseIndex`),
-  INDEX `mutlicourse_course_id_fk_idx` (`courseId` ASC) VISIBLE,
+  INDEX `multicourse_course_id_fk_idx` (`courseId` ASC) VISIBLE,
   CONSTRAINT `multicourse_id_fk`
     FOREIGN KEY (`id`)
     REFERENCES `db`.`course` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `mutlicourse_course_id_fk`
+  CONSTRAINT `multicourse_course_id_fk`
     FOREIGN KEY (`courseId`)
     REFERENCES `db`.`course` (`id`)
     ON DELETE NO ACTION
@@ -208,13 +208,13 @@ ENGINE = InnoDB;
 /* table for which course(s) a student has selected for a multicourse */
 CREATE TABLE IF NOT EXISTS `db`.`multicourseSelection` (
   `sid` INT NOT NULL,
-  `mutlicourse` VARCHAR(16) NOT NULL,
+  `multicourse` VARCHAR(16) NOT NULL,
   `course` VARCHAR(16) NOT NULL,
-  PRIMARY KEY (`sid`, `mutlicourse`),
-  INDEX `mutlicourseSelection_multicourse_fk_idx` (`mutlicourse` ASC) VISIBLE,
+  PRIMARY KEY (`sid`, `multicourse`),
+  INDEX `multicourseSelection_multicourse_fk_idx` (`multicourse` ASC) VISIBLE,
   INDEX `multicourseSelection_course_fk_idx` (`course` ASC) VISIBLE,
-  CONSTRAINT `mutlicourseSelection_multicourse_fk`
-    FOREIGN KEY (`mutlicourse`)
+  CONSTRAINT `multicourseSelection_multicourse_fk`
+    FOREIGN KEY (`multicourse`)
     REFERENCES `db`.`multicourse` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
