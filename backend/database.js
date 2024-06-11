@@ -4,25 +4,14 @@ const errno = require("./errno");
 
 const compsciId = 1;
 
-const connection = sql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    multipleStatements: true
+const pool = sql.createPool({
+    host: 'localhost', // replace with what ever IP the MySQL Server is running on
+    user: 'root', // replace with user that will perform MySQL queries
+    password: 'password', // replace with password for given MySQL user
+    multipleStatements: true,
+    connectionLimit: 10
 });
 
-connection.connect((err) => {
-    if(err) throw err;
-    console.log('Connected to MySql');
-});
-
-// restarts the connection if it closes
-connection.on('close', ()=> {
-    connection.connect((err) => {
-        if(err) throw err;
-        console.log('Connected to MySql');
-    });
-});
 
 /**
  * Callback to ensure an email does not already exist in the database
@@ -34,7 +23,7 @@ connection.on('close', ()=> {
  * @param {emailCB} cb
  */
 function unusedEmail(email, cb) {
-    connection.query('SELECT email FROM db.student WHERE email=?', [email], (err, res) => {
+    pool.query('SELECT email FROM db.student WHERE email=?', [email], (err, res) => {
         cb(res.length === 0);
     });
 }
@@ -63,7 +52,7 @@ exports.addStudent = function addStudent(email, passwd, cb) {
                         if(err) {
                             cb(false, errno.BCRYPT_ERROR, err);
                         } else {
-                            connection.query('INSERT INTO db.student (email, password, planId) VALUES (?, ?, ?)',
+                            pool.query('INSERT INTO db.student (email, password, planId) VALUES (?, ?, ?)',
                                 [email, hash, compsciId],
                                 (err, res) => {
                                     if(err) {
@@ -83,7 +72,7 @@ exports.addStudent = function addStudent(email, passwd, cb) {
 }
 
 exports.validateStudent = function validateStudent(email, passwd, cb) {
-    connection.query('SELECT password FROM db.student WHERE email = ?', [email], (err, res) => {
+    pool.query('SELECT password FROM db.student WHERE email = ?', [email], (err, res) => {
         if(err) {
             cb(false, errno.SQL_ERROR, err);
         } else if(res.length !== 1) {
@@ -104,7 +93,7 @@ exports.validateStudent = function validateStudent(email, passwd, cb) {
 }
 
 exports.studentId = function studentId(email, passwd, cb) {
-    connection.query('SELECT * FROM db.student WHERE email = ?', [email], (err, qres)=> {
+    pool.query('SELECT * FROM db.student WHERE email = ?', [email], (err, qres)=> {
         if(err) {
             cb(false, undefined);
         } else if(qres.length === 0) {
@@ -158,7 +147,7 @@ function multiCourseJson(rows) {
 }
 
 exports.needed = function needed(sid, cb) {
-    connection.query(
+    pool.query(
         'SELECT * FROM db.course WHERE ' +
         'id NOT IN (SELECT id       FROM db.multicourse)             AND ' +
         'id NOT IN (SELECT courseId FROM db.multicourse)             AND ' +
@@ -179,7 +168,7 @@ exports.needed = function needed(sid, cb) {
 }
 
 exports.neededMulti = function neededMulti(sid, cb) {
-    connection.query(
+    pool.query(
         'SELECT * FROM db.multicourse mc ' +
         'JOIN db.course c ON mc.id = c.id ' +
         'WHERE ' +
@@ -201,7 +190,7 @@ exports.neededMulti = function neededMulti(sid, cb) {
 }
 
 exports.completed = function completed(table, sid, cb) {
-    connection.query(
+    pool.query(
         'SELECT * FROM db.course WHERE ' +
         'id NOT IN (SELECT id FROM db.multicourse) AND ' +
         'id IN (SELECT course FROM db.' + table + ' WHERE sid = ?)',
@@ -218,7 +207,7 @@ exports.completed = function completed(table, sid, cb) {
 }
 
 exports.completedMulti = function completedMulti(table, sid, cb) {
-    connection.query(
+    pool.query(
         'SELECT * FROM db.multicourse mc ' +
         'JOIN db.course c ON mc.id = c.id ' +
         'WHERE mc.id IN (SELECT course FROM db.' + table + ' WHERE sid = ?) ' +
@@ -236,7 +225,7 @@ exports.completedMulti = function completedMulti(table, sid, cb) {
 }
 
 exports.removeCompleted = function removeCompleted(id, sid, cb) {
-    connection.query(
+    pool.query(
         'DELETE FROM db.fall      WHERE course = ? AND sid = ?; ' +
         'DELETE FROM db.winter    WHERE course = ? AND sid = ?; ' +
         'DELETE FROM db.spring    WHERE course = ? AND sid = ?; ' +
@@ -256,7 +245,7 @@ exports.removeCompleted = function removeCompleted(id, sid, cb) {
 exports.addCompleted = function addCompleted(table, id, sid, cb) {
     exports.removeCompleted(id, sid, (success) => {
         if(success) {
-            connection.query(
+            pool.query(
                 'INSERT INTO db.' + table + ' VALUES (?, ?)',
                 [sid, id],
                 (err, res)=> {
@@ -274,8 +263,8 @@ exports.addCompleted = function addCompleted(table, id, sid, cb) {
 }
 
 exports.getMulti = function getMulti(sid, cb) {
-    connection.query(
-        'SELECT mutlicourse, course FROM db.multicourseSelection WHERE sid = ?',
+    pool.query(
+        'SELECT multicourse, course FROM db.multicourseSelection WHERE sid = ?',
         [sid],
         (err, res) => {
             if(err) {
@@ -283,7 +272,7 @@ exports.getMulti = function getMulti(sid, cb) {
             } else {
                 const courses = {}
                 for(const row of res) {
-                    courses[row.mutlicourse] = row.course;
+                    courses[row.multicourse] = row.course;
                 }
                 cb(true, courses);
             }
@@ -293,8 +282,8 @@ exports.getMulti = function getMulti(sid, cb) {
 
 exports.setMulti = function setMulti(multiId, id, sid, cb) {
     if(id === multiId) {
-        connection.query(
-            'DELETE FROM db.multicourseSelection WHERE sid = ? AND mutlicourse = ?', // fricken typo in db, too lazy to fix
+        pool.query(
+            'DELETE FROM db.multicourseSelection WHERE sid = ? AND multicourse = ?', // fricken typo in db, too lazy to fix
             [sid, multiId],
             (err, res) => {
                 if(err) {
@@ -305,13 +294,13 @@ exports.setMulti = function setMulti(multiId, id, sid, cb) {
             }
         );
     } else {
-        connection.query(
+        pool.query(
             'INSERT INTO db.multicourseSelection VALUES (?, ?, ?)',
             [sid, multiId, id],
             (err, res) => {
                 if(err) {
-                    connection.query(
-                        'UPDATE db.multicourseSelection SET course = ? WHERE sid = ? AND mutlicourse = ?',
+                    pool.query(
+                        'UPDATE db.multicourseSelection SET course = ? WHERE sid = ? AND multicourse = ?',
                         [id, sid, multiId],
                         (err, res) => {
                             if(err) {
@@ -328,21 +317,3 @@ exports.setMulti = function setMulti(multiId, id, sid, cb) {
         );
     }
 }
-
-
-
-// exports.addStudent("email@email.com", "password", (success, errno, err) => {
-//    if(success) {
-//
-//    }
-// });
-
-// brienenj@cwu.edu 123
-// email@email.com  password
-// exports.validateStudent("brienenj@cwu.edu", "123", (success, errno, err)=> {
-//     if(success) {
-//         console.log("Da Baby");
-//     } else {
-//         console.log("Da Adult");
-//     }
-// });
